@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-<title>Transformation OS</title>
+<title>Transformation OS V8.1</title>
 <meta name="theme-color" content="#14171c">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,7 +36,7 @@
   .topbar .sub { font-size: 12px; color: var(--text-faint); margin-top: 1px; }
   .streak-badge { font-family: var(--font-num); font-size: 13px; color: var(--accent); background: rgba(224,172,79,0.1); border: 1px solid var(--accent-dim); padding: 5px 11px; border-radius: 20px; font-weight: 700; }
 
-  /* ---------- Bottom nav (fixed, always fully visible) ---------- */
+  /* ---------- Bottom nav ---------- */
   nav.bottomnav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 30; background: rgba(20,23,28,0.98); backdrop-filter: blur(10px); border-top: 1px solid var(--border); padding-bottom: env(safe-area-inset-bottom); }
   .navrow { display: flex; max-width: 540px; margin: 0 auto; }
   .navbtn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: none; border: none; color: var(--text-faint); padding: 9px 2px 8px; cursor: pointer; min-height: 58px; }
@@ -65,6 +65,24 @@
   .verdict.recovery .verdict-label { color: var(--bad); }
   .verdict-sub { font-size: 13px; color: var(--text-dim); margin-top: 6px; }
 
+  /* ---------- Coach Card ---------- */
+  .coach-card { background: linear-gradient(135deg, rgba(224,172,79,0.15), var(--surface) 60%); border: 1px solid var(--accent-dim); border-radius: var(--r); padding: 16px; margin-bottom: 12px; }
+  .coach-card .title { font-size: 12px; text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
+  .coach-card .msg { font-size: 15px; line-height: 1.5; margin-top: 6px; color: var(--text); }
+
+  /* ---------- Adherence Dots ---------- */
+  .adherence-row { display: flex; justify-content: space-between; gap: 4px; margin-bottom: 12px; }
+  .adherence-day { display: flex; flex-direction: column; align-items: center; flex: 1; }
+  .adherence-day .label { font-size: 9px; text-transform: uppercase; color: var(--text-faint); font-weight: 700; }
+  .adherence-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text-faint); margin-top: 3px; }
+  .adherence-dot.filled { background: var(--good); border-color: var(--good); color: #0d1a14; }
+  .adherence-dot.today { border-color: var(--accent); }
+
+  /* ---------- Backup Banner ---------- */
+  .backup-banner { background: var(--amber-dim); border: 1px solid var(--amber); border-radius: var(--r); padding: 12px 16px; margin-bottom: 12px; display: none; align-items: center; justify-content: space-between; }
+  .backup-banner .msg { font-size: 13px; color: var(--text); }
+  .backup-banner .btn { background: var(--accent); border: none; color: #1a1305; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 12px; cursor: pointer; }
+
   .bigbtn { width: 100%; background: var(--accent); color: #1a1305; border: none; border-radius: 14px; font-size: 17px; font-weight: 800; padding: 17px 0; cursor: pointer; margin-top: 4px; }
   .bigbtn:active { transform: scale(0.98); }
   .bigbtn.secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
@@ -89,16 +107,17 @@
   .daytab { flex: 1; text-align: center; padding: 13px 0; border-radius: 12px; background: var(--surface); border: 1.5px solid var(--border); color: var(--text-dim); font-size: 14.5px; font-weight: 700; cursor: pointer; }
   .daytab.active { background: var(--accent); color: #1a1305; border-color: var(--accent); }
 
-  .exercise-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; margin-bottom: 12px; transition: border-color 0.2s, background 0.2s; }
+  .exercise-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; margin-bottom: 12px; transition: border-color 0.2s, background 0.2s; cursor: pointer; }
   .exercise-card.done { border-color: var(--good); background: linear-gradient(180deg, rgba(99,173,134,0.09), var(--surface) 50px); }
+  .exercise-card .click-hint { font-size: 10px; color: var(--text-faint); text-align: right; margin-top: 4px; opacity: 0.6; }
   .ex-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
   .ex-name { font-size: 17px; font-weight: 700; line-height: 1.25; }
   .ex-target { font-family: var(--font-num); font-size: 14px; color: var(--text-dim); margin-top: 4px; font-weight: 600; }
   .ex-suggest { font-family: var(--font-num); font-size: 12.5px; color: var(--accent); background: rgba(224,172,79,0.1); border-radius: 8px; padding: 4px 9px; white-space: nowrap; font-weight: 700; }
   .ex-warn { font-size: 11.5px; color: var(--bad); background: rgba(209,117,104,0.12); border-radius: 7px; padding: 4px 8px; margin-top: 6px; display: inline-block; font-weight: 600; }
 
-  .setdots { display: flex; gap: 9px; margin-top: 14px; }
-  .setdot { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--border); background: var(--surface-2); color: var(--text-dim); font-family: var(--font-num); font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: transform 0.1s; }
+  .setdots { display: flex; gap: 9px; margin-top: 14px; pointer-events: none; }
+  .setdot { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--border); background: var(--surface-2); color: var(--text-dim); font-family: var(--font-num); font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.1s; pointer-events: auto; }
   .setdot.on { background: var(--good); border-color: var(--good); color: #0d1a14; }
   .setdot:active { transform: scale(0.9); }
 
@@ -110,7 +129,7 @@
   .stepper input { flex: 1; min-width: 0; border: none; background: transparent; color: var(--text); font-family: var(--font-num); font-size: 18px; font-weight: 700; text-align: center; padding: 10px 2px; }
 
   .rpe-row { display: flex; gap: 6px; margin-top: 12px; }
-  .rpe-chip { font-family: var(--font-num); font-size: 14px; font-weight: 700; padding: 9px 0; flex: 1; text-align: center; border-radius: 9px; border: 1.5px solid var(--border); color: var(--text-dim); background: var(--surface-2); cursor: pointer; }
+  .rpe-chip { font-family: var(--font-body); font-size: 13px; font-weight: 700; padding: 9px 0; flex: 1; text-align: center; border-radius: 9px; border: 1.5px solid var(--border); color: var(--text-dim); background: var(--surface-2); cursor: pointer; }
   .rpe-chip.on { background: var(--accent); border-color: var(--accent); color: #1a1305; }
 
   .warmup-card, .cooldown-card { background: var(--surface-2); border: 1px dashed var(--border); border-radius: 13px; padding: 13px 15px; margin-bottom: 12px; font-size: 13.5px; color: var(--text-dim); line-height: 1.5; }
@@ -136,6 +155,8 @@
   .chip-sm.on { background: var(--accent); border-color: var(--accent); color: #1a1305; font-weight: 700; }
 
   .drink-log-btn { width: 100%; background: var(--surface-2); border: 1.5px dashed var(--border); color: var(--text-dim); border-radius: 11px; padding: 12px; font-size: 13.5px; cursor: pointer; margin-top: 4px; }
+  .more-toggle { background: none; border: none; color: var(--accent); font-weight: 700; font-size: 14px; padding: 8px 0; cursor: pointer; width: 100%; text-align: center; }
+  .more-section { display: none; margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px; }
 
   /* ---------- Trends ---------- */
   .metric-hero { background: linear-gradient(135deg, rgba(224,172,79,0.14), var(--surface) 60%); border: 1px solid var(--accent-dim); border-radius: var(--r); padding: 18px; margin-bottom: 14px; }
@@ -236,10 +257,26 @@
 
     <!-- TODAY -->
     <section class="view active" id="view-today">
+      <!-- Backup Banner -->
+      <div class="backup-banner" id="backupBanner">
+        <span class="msg">📦 You have <span id="backupCount">0</span> sessions. Backup your data.</span>
+        <button class="btn" id="backupNowBtn">Export JSON</button>
+      </div>
+
+      <!-- Adherence Dots -->
+      <div class="adherence-row" id="adherenceRow"></div>
+
       <div class="verdict unknown" id="verdictBand">
         <div class="verdict-label" id="verdictLabel">Log a check-in</div>
         <div class="verdict-sub" id="verdictSub">Tap Check-in to get today's read</div>
       </div>
+
+      <!-- Coach Card -->
+      <div class="coach-card" id="coachCard" style="display:none;">
+        <div class="title">🧠 Coach's Recommendation</div>
+        <div class="msg" id="coachMsg">Loading...</div>
+      </div>
+
       <div class="quickstat-row">
         <div class="qstat"><div class="n" id="tsWeek">0/3</div><div class="l">This week</div></div>
         <div class="qstat"><div class="n" id="tsPhase">—</div><div class="l">Phase week</div></div>
@@ -274,13 +311,15 @@
       <div class="warmup-card" id="warmupCard"></div>
       <div id="exerciseList"></div>
       <div class="cooldown-card" id="cooldownCard"></div>
-      <button class="bigbtn" id="saveBtn" style="margin-bottom:20px;">Save Session</button>
+      <!-- Auto-save enabled -->
+      <div style="text-align:center; color:var(--text-faint); font-size:12px; margin-top:8px;">✅ Auto-saved. Every tap is stored instantly.</div>
     </section>
 
     <!-- CHECK-IN -->
     <section class="view" id="view-checkin">
       <div class="card">
-        <div class="card-title">Morning Read (10 seconds)</div>
+        <div class="card-title">Morning Read (3 mandatory taps)</div>
+        <!-- Mandatory 3 -->
         <div class="ci-row">
           <div class="ci-label">Sleep — <span class="ci-value" id="sleepVal">—</span> h</div>
           <div class="stepper" style="max-width:180px;">
@@ -290,71 +329,67 @@
           </div>
         </div>
         <div class="ci-row">
-          <div class="ci-label">Sleep quality</div>
-          <div class="scale-row" id="qualityRow"></div>
-        </div>
-        <div class="ci-row">
-          <div class="ci-label">Energy</div>
+          <div class="ci-label">Energy (1-10)</div>
           <div class="scale-row" id="energyRow" style="flex-wrap:wrap; gap:5px;"></div>
         </div>
-        <div class="ci-row">
-          <div class="ci-label">Stress</div>
-          <div class="scale-row" id="stressRow" style="flex-wrap:wrap; gap:5px;"></div>
-        </div>
         <div class="ci-row" style="margin-bottom:0;">
-          <div class="ci-label">Soreness</div>
+          <div class="ci-label">Soreness (1-5)</div>
           <div class="scale-row" id="sorenessRow"></div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-title">Nutrition (portion system — no counting)</div>
-        <div class="ci-row"><div class="ci-label">Protein target hit?</div><div class="yn" id="proteinYN"><div class="chip" data-v="yes">Yes</div><div class="chip" data-v="no">No</div></div></div>
-        <div class="ci-row"><div class="ci-label">Veg / fruit in?</div><div class="yn" id="vegYN"><div class="chip" data-v="yes">Yes</div><div class="chip" data-v="no">No</div></div></div>
-        <div class="ci-row" style="margin-bottom:0;"><div class="ci-label">Serve Once held?</div><div class="yn" id="portionYN"><div class="chip" data-v="yes">Yes</div><div class="chip" data-v="no">No</div></div></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Water — 330ml cups</div>
-        <div class="water-row">
-          <button class="water-btn minus" id="waterMinus">−</button>
-          <div class="water-count" id="waterCount">0</div>
-          <button class="water-btn" id="waterPlus">+330ml</button>
+      <!-- More Section (Collapsed by default) -->
+      <button class="more-toggle" id="moreToggle">➕ More (Nutrition, Water, Lifestyle, Measurements)</button>
+      <div class="more-section" id="moreSection">
+        <div class="card" style="margin-top:8px;">
+          <div class="card-title">Nutrition</div>
+          <div class="ci-row"><div class="ci-label">Protein target hit?</div><div class="yn" id="proteinYN"><div class="chip" data-v="yes">Yes</div><div class="chip" data-v="no">No</div></div></div>
+          <div class="ci-row"><div class="ci-label">Veg / fruit in?</div><div class="yn" id="vegYN"><div class="chip" data-v="yes">Yes</div><div class="chip" data-v="no">No</div></div></div>
+          <div class="ci-row" style="margin-bottom:0;"><div class="ci-label">Serve Once held?</div><div class="yn" id="portionYN"><div class="chip" data-v="yes">Yes</div><div class="chip" data-v="no">No</div></div></div>
         </div>
-        <div style="font-size:12px; color:var(--text-faint); margin-top:8px; text-align:center;" id="waterMl">0 ml today · target ~3.3L</div>
-      </div>
 
-      <div class="card">
-        <div class="card-title">Lifestyle</div>
-        <div class="ci-row">
-          <div class="ci-label">Cigarettes today — <span class="ci-value" id="cigVal">0</span></div>
-          <div class="stepper" style="max-width:180px;">
-            <button id="cigMinus">−</button>
-            <input type="number" id="cigCount" readonly>
-            <button id="cigPlus">+</button>
+        <div class="card">
+          <div class="card-title">Water — 330ml cups</div>
+          <div class="water-row">
+            <button class="water-btn minus" id="waterMinus">−</button>
+            <div class="water-count" id="waterCount">0</div>
+            <button class="water-btn" id="waterPlus">+330ml</button>
+          </div>
+          <div style="font-size:12px; color:var(--text-faint); margin-top:8px; text-align:center;" id="waterMl">0 ml today · target ~3.3L</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Lifestyle</div>
+          <div class="ci-row">
+            <div class="ci-label">Cigarettes today — <span class="ci-value" id="cigVal">0</span></div>
+            <div class="stepper" style="max-width:180px;">
+              <button id="cigMinus">−</button>
+              <input type="number" id="cigCount" readonly>
+              <button id="cigPlus">+</button>
+            </div>
+          </div>
+          <div class="ci-row" style="margin-bottom:0;">
+            <div class="ci-label">Alcohol logged today: <span class="ci-value" id="alcVal">0 ml</span></div>
+            <button class="drink-log-btn" id="logDrinkBtn">+ Log a drink</button>
           </div>
         </div>
-        <div class="ci-row" style="margin-bottom:0;">
-          <div class="ci-label">Alcohol logged today: <span class="ci-value" id="alcVal">0 ml</span></div>
-          <button class="drink-log-btn" id="logDrinkBtn">+ Log a drink</button>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="card-title">Measurements (log when you have them)</div>
-        <div class="row2">
-          <div class="field"><label>Weight (kg)</label><input type="number" id="ciWeight" inputmode="decimal"></div>
-          <div class="field"><label>Waist (cm)</label><input type="number" id="ciWaist" inputmode="decimal"></div>
+        <div class="card">
+          <div class="card-title">Measurements</div>
+          <div class="row2">
+            <div class="field"><label>Weight (kg)</label><input type="number" id="ciWeight" inputmode="decimal"></div>
+            <div class="field"><label>Waist (cm)</label><input type="number" id="ciWaist" inputmode="decimal"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label>Chest (cm)</label><input type="number" id="ciChest" inputmode="decimal"></div>
+            <div class="field"><label>Arm (cm)</label><input type="number" id="ciArm" inputmode="decimal"></div>
+          </div>
         </div>
-        <div class="row2">
-          <div class="field"><label>Chest (cm)</label><input type="number" id="ciChest" inputmode="decimal"></div>
-          <div class="field"><label>Arm (cm)</label><input type="number" id="ciArm" inputmode="decimal"></div>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="card-title">Note (optional)</div>
-        <input type="text" class="note-input" id="ciNotes" placeholder="Anything worth flagging">
+        <div class="card">
+          <div class="card-title">Note (optional)</div>
+          <input type="text" class="note-input" id="ciNotes" placeholder="Anything worth flagging">
+        </div>
       </div>
 
       <button class="bigbtn" id="ciSaveBtn" style="margin-bottom:20px;">Done</button>
@@ -408,7 +443,7 @@
       <div class="card">
         <div class="card-title">Reminders</div>
         <div class="settings-row">
-          <div><div class="settings-label">Water chime</div><div class="settings-sub">Rings hourly only while this app is open on screen — phones can't do true background reminders from a free site.</div></div>
+          <div><div class="settings-label">Water chime</div><div class="settings-sub">Rings hourly only while app is open.</div></div>
           <div class="switch" id="chimeSwitch"><div class="knob"></div></div>
         </div>
       </div>
@@ -417,7 +452,7 @@
         <button class="action-btn" id="exportBtn">Export data (.json)</button>
         <button class="action-btn" id="emailBtn">Email monthly summary</button>
         <button class="action-btn danger" id="resetBtn">Reset all data</button>
-        <div class="settings-sub" style="margin-top:4px;">Data lives only on this phone's browser storage. Export regularly as a backup — clearing Safari's website data will erase it.</div>
+        <div class="settings-sub" style="margin-top:4px;">Data lives only on this phone's browser storage. Export regularly.</div>
       </div>
     </section>
 
@@ -441,33 +476,64 @@
 (function () {
   const STORAGE_KEY = "tos_data_v2";
 
+  // UPDATED PRESETS: Cable Fly removed, DB Fly added. All equipment matches your home gym.
   const PRESETS = {
     foundation: {
-      A: { warmup: "Treadmill 9% incline, 5km/h, 3 min. 10 bodyweight squats, 10 arm circles each direction, 8 hip openers/side, 10 scapular retractions. One light warm-up set on Leg Press (not counted).", cooldown: "Doorway chest stretch 30s×2, cross-body shoulder stretch 30s/side, standing quad stretch 30s/side, hamstring stretch 30s/side, hip flexor stretch 30s/side, child's pose 30s.",
-        ex: [["Leg Press","4×10","6–7"],["Smith Bench / Incline DB Press","3×10","6–7"],["Single-Arm DB Row","3×10/side","6–7"],["Shoulder Press Machine","3×10","6–7"],["DB Lateral Raise","2×12–15","6"],["Push-ups","2×15","6"],["DB Bicep Curl","2×12","6"],["DB Overhead Triceps Extension","2×12","6"],["Plank","3×45s","—"]] },
-      B: { warmup: "Rowing machine 3 min easy. 10 bodyweight RDL hinge rehearsals, 10 leg swings/side, 8 cat-cow, 2×15 bodyweight glute bridges.", cooldown: "Same sequence as Day A.",
-        ex: [["Dumbbell RDL","4×10","6–7"],["Leg Press","4×10","6–7"],["Chest Press Machine","3×10","6–7"],["Seated Leg Curl","3×10–12","6–7"],["Incline DB Row","3×10–12","6–7"],["Side-Lying Leg Lifts","2×15/side","6"]] },
-      C: { warmup: "Upright bike 3 min easy-moderate. 10 bodyweight squats, 10 arm circles, 8 hip openers/side, 10 scapular wall slides.", cooldown: "Same sequence as Day A.",
-        ex: [["Leg Press","4×10","6–7"],["Incline DB Press","3×10","6–7"],["Single-Arm DB Row","3×10/side","6–7"],["Roman Chair Back Ext","3×12–15","6"],["DB Rear Delt Raise","3×12–15","6"],["Seated Leg Curl","2×10–12","6–7"],["Plank","3×45–60s","—"]] }
+      A: { 
+        warmup: "Band Face Pulls (2x15) anchored to Smith machine. Treadmill 9% incline, 5km/h, 3 min. 10 bodyweight squats, 10 arm circles, 8 hip openers, 10 scapular retractions. One light warm-up set on Leg Press.", 
+        cooldown: "Doorway chest stretch 30s×2, cross-body shoulder stretch 30s/side, standing quad stretch 30s/side, hamstring stretch 30s/side, hip flexor stretch 30s/side, child's pose 30s. FINISH: Smith Machine Dead Hang (3x30s). Set bar at head height, grab it, keep toes on the floor, let spine decompress.",
+        ex: [["Leg Press","4×10","6–7"],["Smith Bench / Incline DB Press","3×10","6–7"],["Single-Arm DB Row","3×10/side","6–7"],["Shoulder Press Machine","3×10","6–7"],["DB Lateral Raise","2×12–15","6"],["Push-ups","2×15","6"],["DB Bicep Curl","3×12","6"],["DB Overhead Triceps Extension","3×12","6"],["Plank","3×45s","—"]] 
+      },
+      B: { 
+        warmup: "Rowing machine 3 min easy. 10 bodyweight RDL hinge rehearsals, 10 leg swings/side, 8 cat-cow, 2×15 bodyweight glute bridges.", 
+        cooldown: "Same sequence as Day A. FINISH: Smith Machine Dead Hang (3x30s).",
+        ex: [["Dumbbell RDL","4×10","6–7"],["Leg Press","4×10","6–7"],["Chest Press Machine","3×10","6–7"],["Seated Leg Curl","3×10–12","6–7"],["Incline DB Row","3×10–12","6–7"],["Standing Calf Raise","3×12–15","6–7"],["Side-Lying Leg Lifts","2×15/side","6"]] 
+      },
+      C: { 
+        warmup: "Upright bike 3 min easy-moderate. 10 bodyweight squats, 10 arm circles, 8 hip openers, 10 scapular wall slides.", 
+        cooldown: "Same sequence as Day A. FINISH: Smith Machine Dead Hang (3x30s).",
+        ex: [["Leg Press","4×10","6–7"],["Incline DB Press","3×10","6–7"],["Single-Arm DB Row","3×10/side","6–7"],["Roman Chair Back Ext","3×12–15","6"],["DB Rear Delt Raise","3×12–15","6"],["DB Fly","2×12–15","6–7"],["Seated Leg Curl","2×10–12","6–7"],["Plank","3×45–60s","—"],["Farmer Carry","2 rounds (40m)","—"]] 
+      }
     },
     standard: {
-      A: { warmup: "Same warm-up as Foundation A.", cooldown: "Same cooldown as Foundation A. After lifting: 5 min down-regulation breathing (inhale 4s, hold 7s, exhale 8s).",
-        ex: [["Leg Press","3×8–12","6–7"],["Smith Bench / Incline DB Press","3×8–12","6–7"],["Single-Arm DB Row","3×10–12/side","6–7"],["Shoulder Press Machine","3×8–12","6–7"],["DB Lateral Raise","2×12–15","6"],["DB Bicep Curl","2×12","6"],["DB Overhead Triceps Extension","2×12","6"],["Plank","3×45s","—"]] },
-      B: { warmup: "Same warm-up as Foundation B.", cooldown: "Same cooldown. After lifting: 5 min down-regulation breathing.",
-        ex: [["Dumbbell RDL","3×8–12","6–7"],["Leg Press","3×8–12","6–7"],["Chest Press Machine","3×8–12","6–7"],["Seated Leg Curl","2×10–12","6–7"],["Incline DB Row","3×10–12","6–7"],["Side-Lying Leg Lifts","2×15/side","6"]] },
-      C: { warmup: "Same warm-up as Foundation C.", cooldown: "Same cooldown. After lifting: 5 min down-regulation breathing.",
-        ex: [["Leg Press","3×8–12","6–7"],["Incline DB Press","3×8–12","6–7"],["Single-Arm DB Row","3×10–12/side","6–7"],["Roman Chair Back Ext","3×12–15","6"],["DB Rear Delt Raise","3×12–15","6"],["Seated Leg Curl","2×10–12","6–7"],["Plank","3×45s","—"]] },
-      D: { warmup: "Easy 5 min cardio of your choice to raise core temperature.", cooldown: "Full stretch sequence, unhurried — this day is recovery-positive, not a fourth hard session.",
+      A: { 
+        warmup: "Band Face Pulls (2x15) anchored to Smith machine. Same warm-up as Foundation A.", 
+        cooldown: "Same cooldown as Foundation A. After lifting: 5 min down-regulation breathing (inhale 4s, hold 7s, exhale 8s). FINISH: Dead Hang.",
+        ex: [["Leg Press","3×8–12","6–7"],["Smith Bench / Incline DB Press","3×8–12","6–7"],["Single-Arm DB Row","3×10–12/side","6–7"],["Shoulder Press Machine","3×8–12","6–7"],["DB Lateral Raise","2×12–15","6"],["DB Bicep Curl","3×12","6"],["DB Overhead Triceps Extension","3×12","6"],["Plank","3×45s","—"]] 
+      },
+      B: { 
+        warmup: "Same warm-up as Foundation B.", 
+        cooldown: "Same cooldown. After lifting: 5 min down-regulation breathing. FINISH: Dead Hang.",
+        ex: [["Dumbbell RDL","3×8–12","6–7"],["Leg Press","3×8–12","6–7"],["Chest Press Machine","3×8–12","6–7"],["Seated Leg Curl","2×10–12","6–7"],["Incline DB Row","3×10–12","6–7"],["Standing Calf Raise","3×12–15","6–7"],["Side-Lying Leg Lifts","2×15/side","6"]] 
+      },
+      C: { 
+        warmup: "Same warm-up as Foundation C.", 
+        cooldown: "Same cooldown. After lifting: 5 min down-regulation breathing. FINISH: Dead Hang.",
+        ex: [["Leg Press","3×8–12","6–7"],["Incline DB Press","3×8–12","6–7"],["Single-Arm DB Row","3×10–12/side","6–7"],["Roman Chair Back Ext","3×12–15","6"],["DB Rear Delt Raise","3×12–15","6"],["DB Fly","2×12–15","6–7"],["Seated Leg Curl","2×10–12","6–7"],["Plank","3×45s","—"],["Farmer Carry","2 rounds (40m)","—"]] 
+      },
+      D: { 
+        warmup: "Easy 5 min cardio of your choice to raise core temperature.", 
+        cooldown: "Full stretch sequence, unhurried — this day is recovery-positive, not a fourth hard session.",
         ex: [["Steady Cardio (treadmill/bike/row)","1×15–20 min","5–6"],["Hip Flexor + Thoracic Mobility Flow","2 rounds","—"],["Band or Bodyweight Scapular Work","2×15","5"]],
-        note: "Placeholder template — swap for your exact original Part 5.3 prescription once you paste it in." }
+        note: "Placeholder template." 
+      }
     },
     shortened: {
-      A: { warmup: "Abbreviated: 2 min easy cardio, no full warm-up sequence needed.", cooldown: "Quick stretch — 2 min minimum, don't skip entirely.",
-        ex: [["Leg Press","3×10","6–7"],["Smith Bench (forearm-capped)","3×10","6–7"],["Plank","3×30s","—"]] },
-      B: { warmup: "Abbreviated: 2 min easy cardio.", cooldown: "Quick stretch — 2 min minimum.",
-        ex: [["DB RDL","3×10","6–7"],["Leg Press","3×10","6–7"],["Plank","3×30s","—"]] },
-      C: { warmup: "Abbreviated: 2 min easy cardio.", cooldown: "Quick stretch — 2 min minimum.",
-        ex: [["Leg Press","3×10","6–7"],["Incline DB Row","3×10","6–7"],["Plank","3×30s","—"]] }
+      A: { 
+        warmup: "Abbreviated: 2 min easy cardio, no full warm-up sequence needed. Do band pull-aparts.", 
+        cooldown: "Quick stretch — 2 min minimum, don't skip entirely. 1 set Dead Hang.",
+        ex: [["Leg Press","3×10","6–7"],["Smith Bench (forearm-capped)","3×10","6–7"],["Plank","3×30s","—"]] 
+      },
+      B: { 
+        warmup: "Abbreviated: 2 min easy cardio.", 
+        cooldown: "Quick stretch — 2 min minimum.",
+        ex: [["DB RDL","3×10","6–7"],["Leg Press","3×10","6–7"],["Plank","3×30s","—"]] 
+      },
+      C: { 
+        warmup: "Abbreviated: 2 min easy cardio.", 
+        cooldown: "Quick stretch — 2 min minimum.",
+        ex: [["Leg Press","3×10","6–7"],["Incline DB Row","3×10","6–7"],["Plank","3×30s","—"]] 
+      }
     }
   };
 
@@ -476,7 +542,6 @@
   function isoWeekStart(dateStr) { const d = stripDate(dateStr); const day=(d.getDay()+6)%7; d.setDate(d.getDate()-day); return d; }
   function fmtDate(s) { return stripDate(s).toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"}); }
   function parseSetCount(s) { const m = s.match(/^(\d+)/); return m ? parseInt(m[1],10) : 3; }
-  function parseRepMax(s) { const m = s.match(/(\d+)(?!.*\d)/); return m ? parseInt(m[1],10) : null; }
 
   function loadData() {
     try {
@@ -490,7 +555,14 @@
     } catch(e) {}
     return { programStart: null, settings: { chime: false }, sessions: {}, checkins: {}, drinks: {} };
   }
-  function saveData(d) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); return true; } catch(e) { return false; } }
+  function saveData(d) { 
+    try { 
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); 
+      return true; 
+    } catch(e) { 
+      return false; 
+    } 
+  }
 
   let data = loadData();
   if (!data.settings) data.settings = { chime: false };
@@ -526,7 +598,6 @@
 
     document.getElementById("topDate").textContent = fmtDate(state.date);
 
-    // ---------- Nav ----------
     const views = { today: document.getElementById("view-today"), workout: document.getElementById("view-workout"), checkin: document.getElementById("view-checkin"), trends: document.getElementById("view-trends"), history: document.getElementById("view-history"), settings: document.getElementById("view-settings") };
     document.querySelectorAll(".navbtn").forEach(btn => btn.addEventListener("click", () => goToView(btn.dataset.view)));
     function goToView(name) {
@@ -572,7 +643,7 @@
     }
     document.getElementById("streakBadge").textContent = currentStreak() + "🔥";
 
-    // ---------- Progressive overload ----------
+    // ---------- Progressive Overload (FIXED LOGIC) ----------
     function lastLogFor(exerciseName, excludeKey) {
       const entries = Object.entries(data.sessions).filter(([k,s]) => k !== excludeKey && s.exercises && s.exercises[exerciseName] && s.exercises[exerciseName].setsDone > 0);
       entries.sort((a,b) => a[1].date < b[1].date ? 1 : -1);
@@ -585,15 +656,18 @@
       if (!d.weight || isNaN(parseFloat(d.weight))) return null;
       const w = parseFloat(d.weight);
       const setCount = parseSetCount(target);
-      const repMax = parseRepMax(target);
-      const rpeUpper = parseInt((rpeTarget.match(/\d+/g)||[7]).pop(),10);
-      const step = /leg press/i.test(name) ? 5 : (/plank/i.test(name) ? 0 : 1);
+      const step = /leg press/i.test(name) ? 5 : (/plank/i.test(name) || /farmer|calf|fly/i.test(name) ? 0 : 1);
       if (step === 0) return null;
-      if (d.setsDone >= setCount && d.rpe && d.rpe <= rpeUpper - 1) {
-        return { text: "Next: " + (w+step) + "kg", warn: false };
-      }
-      if (d.rpe && d.rpe >= 9) {
-        return { text: "Hold at " + w + "kg", warn: false };
+      
+      // Only suggest if previous session had all sets done & RPE was logged
+      if (d.setsDone >= setCount && d.rpe) {
+        if (d.rpe <= 6) { // Easy -> Increase by 2 steps
+          return { text: "Next: " + (w + step * 2) + "kg", warn: false };
+        } else if (d.rpe <= 8) { // Perfect -> Increase by 1 step
+          return { text: "Next: " + (w + step) + "kg", warn: false };
+        } else { // Hard (>=9) -> Hold weight
+          return { text: "Hold at " + w + "kg", warn: false };
+        }
       }
       return { text: w + "kg last time", warn: false };
     }
@@ -605,16 +679,26 @@
       return null;
     }
 
+    // ---------- Weighted Readiness (FIXED: No Stress) ----------
+    function weightedReadiness(ci) {
+      if (!ci) return null;
+      const sleep = parseFloat(ci.sleep)||6;
+      const energy = parseInt(ci.energy)||5;
+      const soreness = parseInt(ci.soreness)||1;
+      // Formula: Sleep 50% + Energy 30% - Soreness 20%
+      let score = (sleep/10)*50 + (energy/10)*30 - (soreness/5)*20;
+      score = Math.min(100, Math.max(0, score));
+      return { score, sleep, energy, soreness };
+    }
+
     // ---------- Today ----------
     function verdictFromCheckin(ci) {
       if (!ci) return { cls: "unknown", label: "Log a check-in", sub: "Tap Check-in to get today's read" };
-      const sleep = parseFloat(ci.sleep)||0, stress = parseInt(ci.stress)||0, soreness = parseInt(ci.soreness)||0;
-      let flags = 0;
-      if (sleep < 5.5) flags++;
-      if (stress >= 6) flags++;
-      if (soreness >= 3) flags++;
-      if (sleep < 4.5 || soreness >= 4 || stress >= 8) return { cls:"recovery", label:"RECOVERY DAY", sub:"Sleep, stress, or soreness flagged hard today. Light movement only, or full rest." };
-      if (flags >= 1) return { cls:"reduce", label:"REDUCE LOAD", sub:"Train, but ease RPE back a notch and don't chase PRs today." };
+      const w = weightedReadiness(ci);
+      if (!w) return { cls: "unknown", label: "Log a check-in", sub: "Tap Check-in to get today's read" };
+      
+      if (w.score < 30) return { cls:"recovery", label:"RECOVERY DAY", sub:"Readiness is very low. Light movement only, or full rest." };
+      if (w.score < 55) return { cls:"reduce", label:"REDUCE LOAD", sub:"Train, but ease RPE back a notch today." };
       return { cls:"normal", label:"TRAIN TODAY — NORMAL", sub:"Readiness signals look fine. Train as programmed." };
     }
 
@@ -624,6 +708,76 @@
       const seq = ["A","B","C"];
       const idx = seq.indexOf(dates[0].day);
       return seq[(idx+1) % 3];
+    }
+
+    // ---------- Adherence Dots ----------
+    function renderAdherence() {
+      const row = document.getElementById("adherenceRow");
+      row.innerHTML = "";
+      const today = new Date();
+      const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+      const sessionDates = new Set(Object.values(data.sessions).map(s => s.date));
+      
+      const monday = new Date(today);
+      monday.setDate(today.getDate() - (today.getDay() === 0 ? 6 : today.getDay() - 1));
+      
+      for (let i=0; i<7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        const ds = d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+        const isToday = ds === todayStr();
+        const isFilled = sessionDates.has(ds);
+        
+        const dayDiv = document.createElement("div");
+        dayDiv.className = "adherence-day";
+        dayDiv.innerHTML = `
+          <div class="label">${dayNames[i]}</div>
+          <div class="adherence-dot ${isFilled ? 'filled' : ''} ${isToday ? 'today' : ''}">${isFilled ? '✓' : ''}</div>
+        `;
+        row.appendChild(dayDiv);
+      }
+    }
+
+    // ---------- Coach Card ----------
+    function renderCoach(ci) {
+      const card = document.getElementById("coachCard");
+      const msgEl = document.getElementById("coachMsg");
+      if (!ci) { card.style.display = "none"; return; }
+      
+      const w = weightedReadiness(ci);
+      if (!w) { card.style.display = "none"; return; }
+      
+      const sugDay = suggestedDayLetter();
+      const names = { A:"Squat, Push & Shoulder", B:"Hinge & Legs", C:"Full Body Accessory" };
+      let advice = "";
+      
+      if (w.score < 30) advice = `Your readiness is low (${Math.round(w.score)}%). Today is Day ${sugDay}. Consider scaling back RPE to a 5-6. Focus on technique over weight.`;
+      else if (w.sleep < 6) advice = `Your sleep is down (${w.sleep}h). Today is Day ${sugDay}. Keep RPE at a 6-7. Protect your recovery.`;
+      else if (w.soreness >= 4) advice = `Soreness is elevated (${w.soreness}/5). Today is Day ${sugDay}. Warm up thoroughly and keep RPE moderate.`;
+      else advice = `Readiness looks good (${Math.round(w.score)}%). Today is Day ${sugDay}. Train as programmed. Good to go.`;
+      
+      card.style.display = "block";
+      msgEl.textContent = advice;
+    }
+
+    // ---------- Summary Modal (RESTORED) ----------
+    function showSessionSummary() {
+      const totalSessions = Object.keys(data.sessions).length;
+      const weekCount = weekSessionCount(todayStr());
+      const phase = phaseInfo();
+      const modalRoot = document.getElementById("modalRoot");
+      modalRoot.innerHTML = `
+        <div class="modal-overlay">
+          <div class="modal" style="max-height:70vh;">
+            <h2>🏋️ Session Complete!</h2>
+            <div class="sub" style="margin-bottom:12px;">Day ${state.day} - ${state.track}</div>
+            <div class="scorecard-row"><span class="sc-label">Sessions this week</span><span class="sc-value">${weekCount}/3</span></div>
+            <div class="scorecard-row"><span class="sc-label">Total sessions</span><span class="sc-value">${totalSessions}</span></div>
+            <div class="scorecard-row"><span class="sc-label">Current phase</span><span class="sc-value">${phase.title}</span></div>
+            <button class="modal-close" id="summaryDismiss">Great!</button>
+          </div>
+        </div>`;
+      document.getElementById("summaryDismiss").addEventListener("click", () => { modalRoot.innerHTML = ""; });
     }
 
     function renderToday() {
@@ -649,8 +803,24 @@
         goToView("workout"); syncWorkoutControls(); loadExistingSession();
       };
 
+      renderAdherence();
+      renderCoach(ci);
+
+      const sessionCount = Object.keys(data.sessions).length;
+      const banner = document.getElementById("backupBanner");
+      if (sessionCount > 10) {
+        banner.style.display = "flex";
+        document.getElementById("backupCount").textContent = sessionCount;
+      } else {
+        banner.style.display = "none";
+      }
+
       renderInsight();
     }
+
+    document.getElementById("backupNowBtn").addEventListener("click", () => {
+      document.getElementById("exportBtn").click();
+    });
 
     function renderInsight() {
       const allSessions = Object.keys(data.sessions).length;
@@ -666,10 +836,8 @@
       const avgSleep = sleepVals.length ? (sleepVals.reduce((a,b)=>a+b,0)/sleepVals.length) : null;
 
       const weighIns = ciVals.filter(c => c.waist).sort((a,b) => a.date < b.date ? -1 : 1);
-      let waistDeltaTxt = null;
       if (weighIns.length >= 2) {
         const delta = (parseFloat(weighIns[weighIns.length-1].waist) - parseFloat(weighIns[0].waist)).toFixed(1);
-        waistDeltaTxt = delta;
         addLine("Waist", (delta<=0?"↓ ":"↑ ")+Math.abs(delta)+" cm");
       }
       const wkCount = weekSessionCount(todayStr());
@@ -685,13 +853,19 @@
       }
 
       let sentence = "Keep logging — a clearer picture builds after a couple of weeks.";
-      if (avgSleep && avgSleep < 6 && wkCount >= 3) sentence = "Training is progressing well. Recovery is currently your biggest limiter.";
-      else if (avgSleep && avgSleep >= 6.5 && wkCount >= 3) sentence = "Training and recovery are both on track — keep this rhythm going.";
-      else if (wkCount < 2) sentence = "Session count is behind this week — consistency is the lever that matters most right now.";
+      if (avgSleep && avgSleep < 6 && wkCount >= 3) sentence = "Training is progressing, but sleep is limiting your recovery. Focus on sleep quality this week.";
+      else if (avgSleep && avgSleep >= 6.5 && wkCount >= 3) sentence = "Training and recovery are both on track. Your consistency is driving these results. Keep calories steady.";
+      else if (wkCount < 2) sentence = "Session count is behind this week. Consistency is the primary lever for progress right now.";
+      
+      if (weighIns.length >= 2) {
+        const delta = (parseFloat(weighIns[weighIns.length-1].waist) - parseFloat(weighIns[0].waist)).toFixed(1);
+        if (delta < 0 && wkCount >= 2) sentence = `Your waist dropped ${Math.abs(delta)} cm. This is directly tied to your training consistency (${Math.min(100, adherencePct)}%). Keep doing what you're doing.`;
+      }
+      
       document.getElementById("insightSentence").textContent = sentence;
     }
 
-    // ---------- Workout ----------
+    // ---------- Workout (Auto-Save, Fixed Tap Logic) ----------
     const trackSeg = document.getElementById("trackSeg");
     trackSeg.querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => {
       state.track = btn.dataset.v;
@@ -718,15 +892,29 @@
       preset.ex.forEach(([name]) => { state.exData[name] = (saved && saved[name]) ? saved[name] : { weight:"", setsDone:0, rpe:null }; });
     }
 
+    const RPE_MAP = { 'easy': 6, 'perfect': 7.5, 'hard': 9 };
+    const RPE_LABELS = ['Easy', 'Perfect', 'Hard'];
+
     function exCard(name, target, rpeTarget, key) {
       const d = state.exData[name];
       const setCount = parseSetCount(target);
       const isPlank = /plank/i.test(name);
-      const isCardio = /cardio|mobility|scapular/i.test(name);
+      const isCardio = /cardio|mobility|scapular|farmer|calf|fly/i.test(name);
       const card = document.createElement("div");
       card.className = "exercise-card" + (d.setsDone >= setCount ? " done" : "");
       const dots = Array.from({length:setCount}, (_,i) => `<div class="setdot ${i<d.setsDone?"on":""}" data-i="${i+1}">${i+1}</div>`).join("");
-      const rpeChips = [5,6,7,8,9].map(v => `<div class="rpe-chip ${d.rpe===v?"on":""}" data-v="${v}">${v}</div>`).join("");
+      
+      const currentRpe = d.rpe;
+      let activeRpeLabel = '';
+      for (let [label, val] of Object.entries(RPE_MAP)) {
+        if (currentRpe === val) activeRpeLabel = label;
+      }
+      const rpeChips = RPE_LABELS.map(label => {
+        const val = RPE_MAP[label.toLowerCase()];
+        const isOn = (activeRpeLabel === label.toLowerCase());
+        return `<div class="rpe-chip ${isOn ? 'on' : ''}" data-rpe="${val}" data-label="${label.toLowerCase()}">${label}</div>`;
+      }).join('');
+
       const suggestion = (!isPlank && !isCardio) ? suggestFor(name, target, rpeTarget, key) : null;
       const warn = (!isPlank && !isCardio) ? deloadWarning(name, key) : null;
       card.innerHTML = `
@@ -750,24 +938,62 @@
           </div>
         </div>
         <div class="rpe-row">${rpeChips}</div>
+        <div class="click-hint">Tap card to log set</div>
       `;
-      card.querySelectorAll(".setdot").forEach(dot => dot.addEventListener("click", () => {
+
+      // --- EVENT LISTENERS ---
+
+      // 1. Tap whole card to advance set (FIXED: No wrap-around)
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('button') || e.target.closest('input') || e.target.closest('.setdot') || e.target.closest('.rpe-chip')) return;
+        if (d.setsDone < setCount) {
+          d.setsDone = d.setsDone + 1;
+          renderExercises();
+          markUnsavedAndSave();
+          if (navigator.vibrate) navigator.vibrate(8);
+        } else {
+          showToast('✅ All sets logged');
+        }
+      });
+
+      // 2. Dot clicks
+      card.querySelectorAll(".setdot").forEach(dot => dot.addEventListener("click", (e) => {
+        e.stopPropagation();
         const i = parseInt(dot.dataset.i,10);
-        d.setsDone = (d.setsDone===i) ? i-1 : i;
-        renderExercises(); markUnsaved();
+        if (i === d.setsDone + 1 && d.setsDone < setCount) {
+          d.setsDone = d.setsDone + 1;
+        } else if (i === d.setsDone) {
+          d.setsDone = d.setsDone - 1;
+        } else if (i < d.setsDone) {
+          d.setsDone = i;
+        } else {
+          showToast('Complete previous sets first');
+          return;
+        }
+        renderExercises();
+        markUnsavedAndSave();
         if (navigator.vibrate) navigator.vibrate(8);
       }));
+
+      // 3. Weight input
       const input = card.querySelector(".stepper input");
-      input.addEventListener("input", () => { d.weight = input.value; markUnsaved(); });
+      input.addEventListener("input", () => { d.weight = input.value; markUnsavedAndSave(); });
+      input.addEventListener("change", () => { d.weight = input.value; markUnsavedAndSave(); });
+      
       const minus = card.querySelector(".minus"), plus = card.querySelector(".plus");
       const step = /leg press/i.test(name) ? 5 : 1;
-      if (minus) minus.addEventListener("click", () => { d.weight = String(Math.max(0,(parseFloat(d.weight)||0)-step)); input.value=d.weight; markUnsaved(); });
-      if (plus) plus.addEventListener("click", () => { d.weight = String((parseFloat(d.weight)||0)+step); input.value=d.weight; markUnsaved(); });
-      card.querySelectorAll(".rpe-chip").forEach(chip => chip.addEventListener("click", () => {
-        const v = parseInt(chip.dataset.v,10);
-        d.rpe = (d.rpe===v) ? null : v;
-        renderExercises(); markUnsaved();
+      if (minus) minus.addEventListener("click", (e) => { e.stopPropagation(); d.weight = String(Math.max(0,(parseFloat(d.weight)||0)-step)); input.value=d.weight; markUnsavedAndSave(); });
+      if (plus) plus.addEventListener("click", (e) => { e.stopPropagation(); d.weight = String((parseFloat(d.weight)||0)+step); input.value=d.weight; markUnsavedAndSave(); });
+
+      // 4. RPE chips
+      card.querySelectorAll(".rpe-chip").forEach(chip => chip.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const rpeVal = parseFloat(chip.dataset.rpe);
+        d.rpe = (d.rpe === rpeVal) ? null : rpeVal;
+        renderExercises();
+        markUnsavedAndSave();
       }));
+
       return card;
     }
 
@@ -781,7 +1007,31 @@
       preset.ex.forEach(([name,target,rpe]) => list.appendChild(exCard(name,target,rpe,key)));
     }
 
-    function markUnsaved() { }
+    // ---------- Auto-Save & Summary Trigger ----------
+    function markUnsavedAndSave() {
+      const key = state.date + "|" + state.day;
+      data.sessions[key] = { date: state.date, day: state.day, track: state.track, exercises: state.exData, savedAt: new Date().toISOString() };
+      saveData(data);
+      document.getElementById("streakBadge").textContent = currentStreak() + "🔥";
+      renderAdherence();
+      
+      // Check if ALL exercises are complete -> trigger summary
+      const preset = PRESETS[state.track][state.day];
+      if (preset) {
+        let allDone = true;
+        for (let [name] of preset.ex) {
+          const target = preset.ex.find(e => e[0] === name)[1];
+          const setCount = parseSetCount(target);
+          if (state.exData[name] && state.exData[name].setsDone < setCount) {
+            allDone = false;
+            break;
+          }
+        }
+        if (allDone && Object.keys(state.exData).length > 0) {
+          showSessionSummary();
+        }
+      }
+    }
 
     function loadExistingSession() {
       const key = state.date + "|" + state.day;
@@ -791,32 +1041,28 @@
       renderExercises();
     }
 
-    document.getElementById("saveBtn").addEventListener("click", () => {
-      const key = state.date + "|" + state.day;
-      data.sessions[key] = { date: state.date, day: state.day, track: state.track, exercises: state.exData, savedAt: new Date().toISOString() };
-      const ok = saveData(data);
-      if (ok) {
-        showToast("Session saved");
-        document.getElementById("streakBadge").textContent = currentStreak() + "🔥";
-        renderExercises();
-      } else showToast("Save failed — try again");
-    });
-
     syncWorkoutControls();
     loadExistingSession();
 
     // ---------- Check-in ----------
-    const qualityRow = document.getElementById("qualityRow");
     const energyRow = document.getElementById("energyRow");
-    const stressRow = document.getElementById("stressRow");
     const sorenessRow = document.getElementById("sorenessRow");
-    for (let i=1;i<=5;i++){ const c=document.createElement("div"); c.className="scale-chip"; c.dataset.v=i; c.textContent=i; qualityRow.appendChild(c); }
     for (let i=1;i<=10;i++){ const c=document.createElement("div"); c.className="scale-chip"; c.style.minWidth="30px"; c.dataset.v=i; c.textContent=i; energyRow.appendChild(c); }
-    for (let i=1;i<=10;i++){ const c=document.createElement("div"); c.className="scale-chip"; c.style.minWidth="30px"; c.dataset.v=i; c.textContent=i; stressRow.appendChild(c); }
     for (let i=1;i<=5;i++){ const c=document.createElement("div"); c.className="scale-chip"; c.dataset.v=i; c.textContent=i; sorenessRow.appendChild(c); }
 
+    document.getElementById("moreToggle").addEventListener("click", function() {
+      const section = document.getElementById("moreSection");
+      if (section.style.display === "block") {
+        section.style.display = "none";
+        this.textContent = "➕ More (Nutrition, Water, Lifestyle, Measurements)";
+      } else {
+        section.style.display = "block";
+        this.textContent = "➖ Less";
+      }
+    });
+
     let ciState = defaultCi();
-    function defaultCi() { return { sleep: lastSleepValue(), quality:null, energy:null, stress:null, soreness:null, protein:null, veg:null, portion:null, waterCups:0, cigarettes:0, weight:"", waist:"", chest:"", arm:"", notes:"" }; }
+    function defaultCi() { return { sleep: lastSleepValue(), energy:null, soreness:null, protein:null, veg:null, portion:null, waterCups:0, cigarettes:0, weight:"", waist:"", chest:"", arm:"", notes:"" }; }
     function lastSleepValue() {
       const entries = Object.values(data.checkins).filter(c => c.sleep).sort((a,b) => a.date < b.date ? 1 : -1);
       return entries.length ? entries[0].sleep : 6;
@@ -825,9 +1071,7 @@
     function renderCi() {
       document.getElementById("sleepVal").textContent = ciState.sleep;
       document.getElementById("sleepHours").value = ciState.sleep;
-      qualityRow.querySelectorAll(".scale-chip").forEach(c => c.classList.toggle("on", c.dataset.v == ciState.quality));
       energyRow.querySelectorAll(".scale-chip").forEach(c => c.classList.toggle("on", c.dataset.v == ciState.energy));
-      stressRow.querySelectorAll(".scale-chip").forEach(c => c.classList.toggle("on", c.dataset.v == ciState.stress));
       sorenessRow.querySelectorAll(".scale-chip").forEach(c => c.classList.toggle("on", c.dataset.v == ciState.soreness));
       document.getElementById("proteinYN").querySelectorAll(".chip").forEach(c => c.classList.toggle("on", c.dataset.v===ciState.protein));
       document.getElementById("vegYN").querySelectorAll(".chip").forEach(c => c.classList.toggle("on", c.dataset.v===ciState.veg));
@@ -847,10 +1091,8 @@
 
     document.getElementById("sleepMinus").addEventListener("click", () => { ciState.sleep = Math.max(0,(parseFloat(ciState.sleep)||0)-0.5); renderCi(); });
     document.getElementById("sleepPlus").addEventListener("click", () => { ciState.sleep = (parseFloat(ciState.sleep)||0)+0.5; renderCi(); });
-    qualityRow.addEventListener("click", e => { const c=e.target.closest(".scale-chip"); if(!c)return; ciState.quality = ciState.quality==c.dataset.v?null:c.dataset.v; renderCi(); });
-    energyRow.addEventListener("click", e => { const c=e.target.closest(".scale-chip"); if(!c)return; ciState.energy = ciState.energy==c.dataset.v?null:c.dataset.v; renderCi(); });
-    stressRow.addEventListener("click", e => { const c=e.target.closest(".scale-chip"); if(!c)return; ciState.stress = ciState.stress==c.dataset.v?null:c.dataset.v; renderCi(); });
-    sorenessRow.addEventListener("click", e => { const c=e.target.closest(".scale-chip"); if(!c)return; ciState.soreness = ciState.soreness==c.dataset.v?null:c.dataset.v; renderCi(); });
+    energyRow.addEventListener("click", e => { const c=e.target.closest(".scale-chip"); if(!c)return; ciState.energy = ciState.energy==c.dataset.v?null:parseInt(c.dataset.v); renderCi(); });
+    sorenessRow.addEventListener("click", e => { const c=e.target.closest(".scale-chip"); if(!c)return; ciState.soreness = ciState.soreness==c.dataset.v?null:parseInt(c.dataset.v); renderCi(); });
     document.getElementById("proteinYN").addEventListener("click", e => { const c=e.target.closest(".chip"); if(!c)return; ciState.protein = ciState.protein===c.dataset.v?null:c.dataset.v; renderCi(); });
     document.getElementById("vegYN").addEventListener("click", e => { const c=e.target.closest(".chip"); if(!c)return; ciState.veg = ciState.veg===c.dataset.v?null:c.dataset.v; renderCi(); });
     document.getElementById("portionYN").addEventListener("click", e => { const c=e.target.closest(".chip"); if(!c)return; ciState.portion = ciState.portion===c.dataset.v?null:c.dataset.v; renderCi(); });
@@ -996,7 +1238,7 @@
           detail.innerHTML = Object.entries(s.exercises||{}).map(([n,d]) => `<div class="hist-ex"><b>${n}</b><span>${d.setsDone||0} sets · ${d.weight||"—"} ${d.rpe?("RPE "+d.rpe):""}</span></div>`).join("");
         } else {
           const c = item.data;
-          el.innerHTML = `<div class="hist-top"><div><div class="hist-date">📋 ${c.date}</div><div class="hist-meta">Sleep ${c.sleep||"—"}h · Energy ${c.energy||"—"} · Stress ${c.stress||"—"}</div></div><div style="color:var(--text-faint);">›</div></div><div class="hist-detail"></div>`;
+          el.innerHTML = `<div class="hist-top"><div><div class="hist-date">📋 ${c.date}</div><div class="hist-meta">Sleep ${c.sleep||"—"}h · Energy ${c.energy||"—"} · Soreness ${c.soreness||"—"}</div></div><div style="color:var(--text-faint);">›</div></div><div class="hist-detail"></div>`;
           const detail = el.querySelector(".hist-detail");
           detail.innerHTML = `<div class="hist-ex"><b>Weight</b><span>${c.weight||"—"} kg</span></div><div class="hist-ex"><b>Waist</b><span>${c.waist||"—"} cm</span></div><div class="hist-ex"><b>Water</b><span>${(c.waterCups||0)*330} ml</span></div><div class="hist-ex"><b>Cigarettes</b><span>${c.cigarettes||0}</span></div>${c.notes?`<div class="hist-ex"><b>Note</b><span>${c.notes}</span></div>`:""}`;
         }
@@ -1077,7 +1319,7 @@
       document.getElementById("cancelReset").addEventListener("click", () => { modalRoot.innerHTML = ""; });
     });
 
-    // Register Service Worker for offline support
+    // Register Service Worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').then(() => {
         console.log('✅ Service Worker registered');
